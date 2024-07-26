@@ -53,7 +53,7 @@ public extension Templates {
             WindowReader { window in
                 label(fadeLabel)
                     .frameTag(model.id)
-                    .contentShape(Rectangle())
+//                    .contentShape(Rectangle())
                     .simultaneousGesture(
                         DragGesture(minimumDistance: 0, coordinateSpace: .global)
                             .onChanged { value in
