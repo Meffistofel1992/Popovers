@@ -55,7 +55,7 @@ public extension Templates {
                     .frameTag(model.id)
                     .contentShape(Rectangle())
                     .simultaneousGesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                        DragGesture(minimumDistance: 10, coordinateSpace: .global)
                             .onChanged { value in
 
                                 gestureModel.onDragChanged(
