@@ -121,7 +121,6 @@ extension Templates {
                 if !model.present {
                     if labelFrame.contains(newDragLocation) {
                         present(true)
-                        labelPressedWhenAlreadyPresented = true
                     } else {
                         withAnimation(model.configuration.labelFadeAnimation) {
                             fadeLabel(false)
@@ -133,11 +132,10 @@ extension Templates {
                     model.hoveringItemID = nil
 
                     /// The user lifted their finger outside an item target.
-                    if selectedItemID == nil {
+                    if selectedItemID == nil || labelFrame.contains(newDragLocation) {
                         model.configuration.onLiftWithoutSelecting?()
-                    } else if model.configuration.dismissAfterSelecting && labelFrame.contains(newDragLocation) {
+                    } else if model.configuration.dismissAfterSelecting {
                         /// Dismiss if the user lifted up their finger on an item.
-                        labelPressedWhenAlreadyPresented = false
                         present(false)
                     }
                 }
