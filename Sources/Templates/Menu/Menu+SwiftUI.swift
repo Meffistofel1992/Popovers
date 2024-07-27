@@ -54,34 +54,18 @@ public extension Templates {
                 label(fadeLabel)
                     .frameTag(model.id)
                     .contentShape(Rectangle())
-                    .simultaneousGesture(
-                        DragGesture(minimumDistance: 10, coordinateSpace: .global)
-                            .onChanged { value in
-
-                                gestureModel.onDragChanged(
-                                    newDragLocation: value.location,
-                                    model: model,
-                                    labelFrame: window.frameTagged(model.id),
-                                    window: window
-                                ) { present in
-                                    model.present = present
-                                } fadeLabel: { fade in
-                                    fadeLabel = fade
-                                }
-                            }
-                            .onEnded { value in
-                                gestureModel.onDragEnded(
-                                    newDragLocation: value.location,
-                                    model: model,
-                                    labelFrame: window.frameTagged(model.id),
-                                    window: window
-                                ) { present in
-                                    model.present = present
-                                } fadeLabel: { fade in
-                                    fadeLabel = fade
-                                }
-                            }
-                    )
+                    .onTapGesture {
+                        gestureModel.onDragChanged(
+                            newDragLocation: .zero,
+                            model: model,
+                            labelFrame: window.frameTagged(model.id),
+                            window: window
+                        ) { present in
+                            model.present = present
+                        } fadeLabel: { fade in
+                            fadeLabel = fade
+                        }
+                    }
                     .onValueChange(of: model.present) { _, present in
                         if !present {
                             withAnimation(model.configuration.labelFadeAnimation) {
