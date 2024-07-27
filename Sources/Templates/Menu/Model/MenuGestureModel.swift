@@ -132,7 +132,7 @@ extension Templates {
                     model.hoveringItemID = nil
 
                     /// The user lifted their finger outside an item target.
-                    if selectedItemID == nil || labelFrame.contains(newDragLocation) {
+                    if selectedItemID == nil && !labelFrame.contains(newDragLocation) {
                         model.configuration.onLiftWithoutSelecting?()
                     } else if model.configuration.dismissAfterSelecting {
                         /// Dismiss if the user lifted up their finger on an item.
