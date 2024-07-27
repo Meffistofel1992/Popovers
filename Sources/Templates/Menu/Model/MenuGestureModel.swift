@@ -121,6 +121,7 @@ extension Templates {
                 if !model.present {
                     if labelFrame.contains(newDragLocation) {
                         present(true)
+                        labelPressedWhenAlreadyPresented = true
                     } else {
                         withAnimation(model.configuration.labelFadeAnimation) {
                             fadeLabel(false)
@@ -134,7 +135,7 @@ extension Templates {
                     /// The user lifted their finger outside an item target.
                     if selectedItemID == nil {
                         model.configuration.onLiftWithoutSelecting?()
-                    } else if model.configuration.dismissAfterSelecting {
+                    } else if model.configuration.dismissAfterSelecting && labelFrame.contains(newDragLocation) {
                         /// Dismiss if the user lifted up their finger on an item.
                         present(false)
                     }
