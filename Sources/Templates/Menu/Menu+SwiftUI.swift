@@ -55,23 +55,24 @@ public extension Templates {
                     .frameTag(model.id)
                     .contentShape(Rectangle())
                     .simultaneousGesture(
-                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                            .onChanged { value in
-
-                                gestureModel.onDragChanged(
-                                    newDragLocation: value.location,
-                                    model: model,
-                                    labelFrame: window.frameTagged(model.id),
-                                    window: window
-                                ) { present in
-                                    model.present = present
-                                } fadeLabel: { fade in
-                                    fadeLabel = fade
-                                }
-                            }
+                        TapGesture()
+//                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
+//                            .onChanged { value in
+//
+//                                gestureModel.onDragChanged(
+//                                    newDragLocation: value.location,
+//                                    model: model,
+//                                    labelFrame: window.frameTagged(model.id),
+//                                    window: window
+//                                ) { present in
+//                                    model.present = present
+//                                } fadeLabel: { fade in
+//                                    fadeLabel = fade
+//                                }
+//                            }
                             .onEnded { value in
                                 gestureModel.onDragEnded(
-                                    newDragLocation: value.location,
+                                    newDragLocation: .zero,
                                     model: model,
                                     labelFrame: window.frameTagged(model.id),
                                     window: window
