@@ -54,7 +54,7 @@ public extension Templates {
 
                 label(fadeLabel)
                     .frameTag(model.id)
-                    .contentShape(Rectangle())
+//                    .contentShape(Rectangle())
                     .onTouch { location in
                         gestureModel.onDragEnded(
                             newDragLocation: location,
