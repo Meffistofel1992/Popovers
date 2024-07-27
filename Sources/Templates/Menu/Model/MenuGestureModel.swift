@@ -134,7 +134,7 @@ extension Templates {
                     /// The user lifted their finger outside an item target.
                     if selectedItemID == nil && !labelFrame.contains(newDragLocation) {
                         model.configuration.onLiftWithoutSelecting?()
-                    } else if model.configuration.dismissAfterSelecting {
+                    } else {
                         /// Dismiss if the user lifted up their finger on an item.
                         present(false)
                     }
