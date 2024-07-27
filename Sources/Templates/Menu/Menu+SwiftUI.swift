@@ -55,7 +55,7 @@ public extension Templates {
                 label(fadeLabel)
                     .frameTag(model.id)
                     .contentShape(Rectangle())
-                    .onTouch { location in
+                    .onTouch(type: .ended, limitToBounds: false) { location in
                         print(window)
 //                        gestureModel.onDragEnded(
 //                            newDragLocation: .zero,
