@@ -137,6 +137,7 @@ extension Templates {
                         model.configuration.onLiftWithoutSelecting?()
                     } else if model.configuration.dismissAfterSelecting && labelFrame.contains(newDragLocation) {
                         /// Dismiss if the user lifted up their finger on an item.
+                        labelPressedWhenAlreadyPresented = false
                         present(false)
                     }
                 }
