@@ -55,10 +55,8 @@ public extension Templates {
                 label(fadeLabel)
                     .frameTag(model.id)
                     .contentShape(Rectangle())
-                    .onTapGesture {
+                    .onTouch { location in
                         print(window)
-                    }
-//                    .onTouch { location in
 //                        gestureModel.onDragEnded(
 //                            newDragLocation: .zero,
 //                            model: model,
@@ -69,7 +67,7 @@ public extension Templates {
 //                        } fadeLabel: { fade in
 //                            fadeLabel = fade
 //                        }
-//                    }
+                    }
 //                    .simultaneousGesture(
 //                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
 //                            .onChanged { value in
