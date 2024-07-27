@@ -54,18 +54,7 @@ public extension Templates {
                 label(fadeLabel)
                     .frameTag(model.id)
                     .contentShape(Rectangle())
-                    .onTapGesture {
-                        gestureModel.onDragEnded(
-                            newDragLocation: .zero,
-                            model: model,
-                            labelFrame: window.frameTagged(model.id),
-                            window: window
-                        ) { present in
-                            model.present = present
-                        } fadeLabel: { fade in
-                            fadeLabel = fade
-                        }
-                    }
+                    .onTap(gestureModel: gestureModel, fadeLabel: $fadeLabel, model: model, window: window)
                     .onValueChange(of: model.present) { _, present in
                         if !present {
                             withAnimation(model.configuration.labelFadeAnimation) {
@@ -112,5 +101,34 @@ public extension Templates {
             }
         }
     }
+}
+
+extension View {
+    @ViewBuilder
+    func onTap(
+        gestureModel: Templates.MenuGestureModel,
+        fadeLabel: Binding<Bool>,
+        model: Templates.MenuModel,
+        window: UIWindow?
+    ) -> some View {
+            if #available(iOS 17, *) {
+                self
+                .onTapGesture { location in
+                    gestureModel.onDragEnded(
+                        newDragLocation: location,
+                        model: model,
+                        labelFrame: window.frameTagged(model.id),
+                        window: window
+                    ) { present in
+                        model.present = present
+                    } fadeLabel: { fade in
+                        fadeLabel.wrappedValue = fade
+                    }
+                }
+            }
+            else {
+                self
+            }
+        }
 }
 #endif
