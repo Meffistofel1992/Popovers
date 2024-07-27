@@ -57,7 +57,7 @@ public extension Templates {
 //                    .contentShape(Rectangle())
                     .onTouch { location in
                         gestureModel.onDragEnded(
-                            newDragLocation: location,
+                            newDragLocation: .zero,
                             model: model,
                             labelFrame: window.frameTagged(model.id),
                             window: window
