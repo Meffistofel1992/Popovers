@@ -49,9 +49,9 @@ extension Templates {
                             currentUUID == self.labelPressUUID,
                             let dragLocation = self.dragLocation /// check the location once again
                         {
-//                            if labelFrame.contains(dragLocation) {
+                            if labelFrame.contains(dragLocation) {
                                 present(true)
-//                            }
+                            }
                         }
                     }
                 }
