@@ -55,33 +55,6 @@ public extension Templates {
                     .frameTag(model.id)
                     .contentShape(Rectangle())
                     .onTap(gestureModel: gestureModel, window: window, model: model, fadeLabel: $fadeLabel)
-//                    .simultaneousGesture(
-//                        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-//                            .onChanged { value in
-//                                gestureModel.onDragChanged(
-//                                    newDragLocation: value.location,
-//                                    model: model,
-//                                    labelFrame: window.frameTagged(model.id),
-//                                    window: window
-//                                ) { present in
-//                                    model.present = present
-//                                } fadeLabel: { fade in
-//                                    fadeLabel = fade
-//                                }
-//                            }
-//                            .onEnded { value in
-//                                gestureModel.onDragEnded(
-//                                    newDragLocation: value.location,
-//                                    model: model,
-//                                    labelFrame: window.frameTagged(model.id),
-//                                    window: window
-//                                ) { present in
-//                                    model.present = present
-//                                } fadeLabel: { fade in
-//                                    fadeLabel = fade
-//                                }
-//                            }
-//                    )
                     .onValueChange(of: model.present) { _, present in
                         if !present {
                             withAnimation(model.configuration.labelFadeAnimation) {

@@ -116,14 +116,17 @@ extension Templates {
                     labelFrame.contains(newDragLocation)
                 {
                     present(false)
+                    fadeLabel(true)
                 }
             } else {
                 if !model.present {
                     if labelFrame.contains(newDragLocation) {
                         present(true)
+                        fadeLabel(false)
                     } else {
                         withAnimation(model.configuration.labelFadeAnimation) {
-                            fadeLabel(false)
+                            present(false)
+                            fadeLabel(true)
                         }
                     }
                 } else {
@@ -137,6 +140,7 @@ extension Templates {
                     } else if model.configuration.dismissAfterSelecting {
                         /// Dismiss if the user lifted up their finger on an item.
                         present(false)
+                        fadeLabel(true)
                     }
                 }
             }
