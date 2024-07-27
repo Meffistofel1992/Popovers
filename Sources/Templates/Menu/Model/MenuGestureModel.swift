@@ -121,7 +121,6 @@ extension Templates {
                 if !model.present {
                     if labelFrame.contains(newDragLocation) {
                         present(true)
-                        labelPressedWhenAlreadyPresented = true
                     } else {
                         withAnimation(model.configuration.labelFadeAnimation) {
                             fadeLabel(false)
