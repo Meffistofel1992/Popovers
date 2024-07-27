@@ -50,7 +50,8 @@ public extension Templates {
         }
 
         public var body: some View {
-            WindowReader { window in
+            WindowReader { _ in
+                let window = currentKeyWindow
                 label(fadeLabel)
                     .frameTag(model.id)
                     .contentShape(Rectangle())
@@ -131,6 +132,17 @@ public extension Templates {
         }
     }
 }
+
+var currentKeyWindow: UIWindow? {
+  UIApplication.shared.connectedScenes
+//      .filter { $0.activationState == .foregroundActive }
+    .map { $0 as? UIWindowScene }
+    .compactMap { $0 }
+    .first?.windows
+    .filter { $0.isKeyWindow }
+    .first
+}
+
 // Our UIKit to SwiftUI wrapper view
 struct TouchLocatingView: UIViewRepresentable {
     // The types of touches users want to be notified about
