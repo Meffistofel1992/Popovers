@@ -120,8 +120,9 @@ extension View {
                     window: window
                 ) { present in
                     model.present = present
+                    fadeLabel.wrappedValue = present
                 } fadeLabel: { fade in
-                    fadeLabel.wrappedValue = fade
+//                    fadeLabel.wrappedValue = fade
                 }
             }
         } else {
