@@ -139,7 +139,7 @@ extension View {
         fadeLabel: Binding<Bool>
     ) -> some View {
         if #available(iOS 17.0, *) {
-            self.onTapGesture { location in
+            self.onTapGesture(coordinateSpace: .global) { location in
                 gestureModel.onDragEnded(
                     newDragLocation: location,
                     model: model,
