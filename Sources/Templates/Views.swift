@@ -15,12 +15,14 @@ public extension Templates {
     struct DividedVStack<Content: View>: View {
         var leadingMargin: CGFloat
         var trailingMargin: CGFloat
+        var spacing: CGFloat
         var color: UIColor?
         var content: Content
 
         public init(
             leadingMargin: CGFloat = 0,
             trailingMargin: CGFloat = 0,
+            spacing: CGFloat = 0,
             color: UIColor? = nil,
             @ViewBuilder content: () -> Content
         ) {
@@ -28,6 +30,7 @@ public extension Templates {
             self.trailingMargin = trailingMargin
             self.color = color
             self.content = content()
+            self.spacing = spacing
         }
 
         public var body: some View {
@@ -35,6 +38,7 @@ public extension Templates {
                 DividedVStackLayout(
                     leadingMargin: leadingMargin,
                     trailingMargin: trailingMargin,
+                    spacing: spacing,
                     color: color
                 )
             ) {
@@ -46,13 +50,14 @@ public extension Templates {
     struct DividedVStackLayout: _VariadicView_UnaryViewRoot {
         var leadingMargin: CGFloat
         var trailingMargin: CGFloat
+        var spacing: CGFloat = 0
         var color: UIColor?
 
         @ViewBuilder
         public func body(children: _VariadicView.Children) -> some View {
             let last = children.last?.id
 
-            VStack(spacing: 0) {
+            VStack(spacing: spacing) {
                 ForEach(children) { child in
                     child
 
