@@ -34,7 +34,6 @@ public extension Templates {
         public var minimumScale = CGFloat(0.7) /// For rubber banding - the scale the the popover should shrink to when rubber banding.
         public var useEntireMenuAsGestureHotspot: Bool = true /// Attach the gesture recognizer to the entire menu, for selection/dismissal. Set to false if using custom `MenuGestureHotspot`.
         public var dismissAfterSelecting = true /// Dismiss the menu after selecting an item.
-        public var delayBeforeClose: Double = 0
         public var onLiftWithoutSelecting: (() -> Void)? = {} /// Called when the user lifts their finger either outside the menu, or in between menu items.
 
         /// Create the default attributes for the popover menu.
@@ -60,7 +59,6 @@ public extension Templates {
             scaleRange: ClosedRange<CGFloat> = 30 ... 80,
             minimumScale: CGFloat = 0.85,
             dismissAfterSelecting: Bool = true,
-            delayBeforeClose: Double = 0,
             onLiftWithoutSelecting: (() -> Void)? = {}
         ) {
             self.hapticFeedbackEnabled = hapticFeedbackEnabled
@@ -84,7 +82,6 @@ public extension Templates {
             self.scaleRange = scaleRange
             self.minimumScale = minimumScale
             self.dismissAfterSelecting = dismissAfterSelecting
-            self.delayBeforeClose = delayBeforeClose
             self.onLiftWithoutSelecting = onLiftWithoutSelecting
         }
     }
@@ -207,13 +204,6 @@ public extension Templates {
                         action()
                     }
                     model.selectedItemID = nil
-
-                    if model.configuration.dismissAfterSelecting {
-                        /// Dismiss if the user lifted up their finger on an item.
-                        DispatchQueue.main.asyncAfter(deadline: .now() + model.configuration.delayBeforeClose) {
-                            model.present = false
-                        }
-                    }
                 }
                 .onDisappear {
                     model.selectedItemID = nil
@@ -393,6 +383,14 @@ extension View {
                     let selectedItemID = model.getItemID(from: value.location)
                     model.selectedItemID = selectedItemID
                     model.hoveringItemID = nil
+
+                    if selectedItemID == nil {
+                        /// The user lifted their finger outside an item target.
+                        model.configuration.onLiftWithoutSelecting?()
+                    } else if model.configuration.dismissAfterSelecting {
+                        /// Dismiss if the user lifted up their finger on an item.
+                        model.present = false
+                    }
                 }
         )
     }
