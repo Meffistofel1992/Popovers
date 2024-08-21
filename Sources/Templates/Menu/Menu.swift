@@ -384,13 +384,13 @@ extension View {
                     model.selectedItemID = selectedItemID
                     model.hoveringItemID = nil
 
-                    if selectedItemID == nil {
-                        /// The user lifted their finger outside an item target.
-                        model.configuration.onLiftWithoutSelecting?()
-                    } else if model.configuration.dismissAfterSelecting {
-                        /// Dismiss if the user lifted up their finger on an item.
-                        model.present = false
-                    }
+//                    if selectedItemID == nil {
+//                        /// The user lifted their finger outside an item target.
+//                        model.configuration.onLiftWithoutSelecting?()
+//                    } else if model.configuration.dismissAfterSelecting {
+//                        /// Dismiss if the user lifted up their finger on an item.
+//                        model.present = false
+//                    }
                 }
         )
     }
